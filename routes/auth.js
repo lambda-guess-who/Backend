@@ -7,8 +7,8 @@ const secret = process.env.JWT_SECRET;
 router.get("/", (req, res) => {
   res.status(200).json("ITS ALIVEEEE");
 });
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", checkBody, register);
+router.post("/login", checkBody, login);
 
 async function login(req, res) {
   let { username, password } = req.body;
@@ -21,6 +21,7 @@ async function login(req, res) {
       return res.status(200).json({ token });
     }
   }
+  return res.status(401).json("Invalid Credientials");
 }
 
 function register(req, res) {
@@ -40,5 +41,17 @@ function register(req, res) {
     .catch(error => {
       res.status(500).json(error);
     });
+}
+
+function checkBody(req, res, next) {
+  if (req.body) {
+    if (req.body.username) {
+      if (req.body.password) {
+        return next();
+      }
+    }
+  }
+
+  return res.status(400).json("please provide a valid body");
 }
 module.exports = router;

@@ -3,13 +3,17 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
 const auth = require("./routes/auth");
+
+const basic = require("./routes/basic");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const PASS = process.env.PASS;
 app.use(express.json());
 app.use(cors());
 app.use("/api/auth", auth);
+app.use("/", basic);
 
+module.exports = app;
 mongoose
   .connect(
     `mongodb+srv://admin:${PASS}@guesswho-faq0g.mongodb.net/test?retryWrites=true&w=majority`,
