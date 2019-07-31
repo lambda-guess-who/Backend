@@ -37,7 +37,10 @@ router.post("/", authenticate, async (req, res) => {
 router.delete("/:id", authenticate, async (req, res) => {
   try {
     let { id } = req.params;
-    let tweets = await Tweet.FindByIdandRemove(id);
+    id = parseInt(id);
+    let tweets = await Tweet.find({ id })
+      .remove()
+      .exec();
     res.status(204);
   } catch (e) {
     res.status(500).json(e.message);
