@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
-
-router.put("/highscore/:id", async (req, res) => {
+const { authenticate } = require("../middleware/authenticate");
+router.put("/highscore/:id", authenticate, async (req, res) => {
   let { id } = req.params;
   try {
     let user = await User.findByIdAndUpdate(
