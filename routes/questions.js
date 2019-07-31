@@ -10,6 +10,7 @@ router.get("/", authenticate, async (req, res) => {
     let cand = await Candidate.find();
     let rand = [];
     let max = cand.length;
+
     while (rand.length < 3) {
       let candToAdd = getRandomInt(max - 1);
       if (!rand.includes(candToAdd)) {
@@ -26,7 +27,7 @@ router.get("/", authenticate, async (req, res) => {
     let question = {
       question: tweets[questionInt].full_text,
       answer: tweets[questionInt].user,
-      candidates: [cand[0], cand[1], cand[2]]
+      candidates: [cand[rand[0]], cand[rand[1]], cand[rand[3]]]
     };
 
     res.status(200).json(question);
