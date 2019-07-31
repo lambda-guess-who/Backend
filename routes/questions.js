@@ -19,7 +19,9 @@ router.get("/", authenticate, async (req, res) => {
     }
 
     let candidateRand = getRandomInt(3);
-    let tweets = await Tweet.find({ "user.screen_name": cand[rand[0]].handle });
+    let tweets = await Tweet.find({
+      "user.screen_name": cand[rand[candidateRand]].handle
+    });
 
     max = tweets.length;
     let questionInt = getRandomInt(max - 1);
@@ -27,7 +29,7 @@ router.get("/", authenticate, async (req, res) => {
     let question = {
       question: tweets[questionInt].full_text,
       answer: tweets[questionInt].user,
-      candidates: [cand[rand[0]], cand[rand[1]], cand[rand[3]]]
+      candidates: [cand[rand[0]], cand[rand[1]], cand[rand[2]]]
     };
 
     res.status(200).json(question);
