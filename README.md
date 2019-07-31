@@ -6,11 +6,15 @@ REQUIRE PASS,PORT,JWT_SECRET ENV Variables
 
 [] GET /amIAuthed
 
+//////////////////////////
+
 [] GET /api/auth
 
-[] POST /api/auth/login
+[] POST /api/auth/login {username: String, password: String}
 
-[] POST /api/auth/register
+[] POST /api/auth/register {username: String, password: String}
+
+//////////////////////////
 
 [] GET /api/tweet/
 
@@ -21,3 +25,7 @@ REQUIRE PASS,PORT,JWT_SECRET ENV Variables
 [] POST /api/tweet/
 
 [] DELETE /api/tweet/:id
+
+/////////////////////////
+
+[] PUT /api/User/highscore/:id { highscore : Number}
