@@ -5,8 +5,8 @@ const cors = require("cors");
 const auth = require("./routes/auth");
 const tweet = require("./routes/tweets");
 const basic = require("./routes/basic");
-
 const quest = require("./routes/questions");
+const user = require("./routes/user");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const PASS = process.env.PASS;
@@ -15,6 +15,7 @@ app.use(cors());
 app.use("/api/auth", auth);
 app.use("/api/tweet", tweet);
 app.use("/api/question", quest);
+app.use("/api/user", user);
 app.use("/", basic);
 
 module.exports = app;
