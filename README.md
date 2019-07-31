@@ -28,4 +28,4 @@ REQUIRE PASS,PORT,JWT_SECRET ENV Variables
 
 /////////////////////////
 
-[] PUT /api/User/highscore/:id { highscore : Number}
+[] PUT /api/user/highscore/:id { highscore : Number}
