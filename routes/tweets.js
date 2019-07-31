@@ -24,6 +24,18 @@ router.get("/:id", authenticate, async (req, res) => {
     res.status(500).json(e.message);
   }
 });
+router.get("/last/:id", authenticate, async (req, res) => {
+  try {
+    let { id } = req.params;
+    id = parseInt(id);
+    let tweets = await Tweet.findOne({ "user.id": id }).sort({
+      created_at: -1
+    });
+    res.status(200).json(tweets);
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
+});
 router.post("/", authenticate, async (req, res) => {
   try {
     let tweetOBJ = req.body;
