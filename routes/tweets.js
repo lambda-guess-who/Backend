@@ -17,11 +17,11 @@ router.get("/", authenticate, async (req, res) => {
 router.get("/:id", authenticate, async (req, res) => {
   try {
     let { id } = req.params;
-    let tweets = await Tweet.find({ id }).sort("created_at");
-    res.status(200).json(tweets);
+    id = parseInt(id);
+    let tweets = await Tweet.find({ id });
+    res.status(200).json({ tweets, id });
   } catch (e) {
     res.status(500).json(e.message);
-  } finally {
   }
 });
 router.post("/", authenticate, async (req, res) => {
