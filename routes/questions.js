@@ -11,7 +11,7 @@ router.get("/", authenticate, async (req, res) => {
     let rand = [];
     let max = cand.length;
     while (rand.length < 3) {
-      let candToAdd = getRandomInt(max);
+      let candToAdd = getRandomInt(max - 1);
       if (!rand.includes(candToAdd)) {
         rand.push(candToAdd);
       }
@@ -21,7 +21,7 @@ router.get("/", authenticate, async (req, res) => {
     let tweets = await Tweet.find({ "user.screen_name": cand[rand[0]].handle });
 
     max = tweets.length;
-    let questionInt = getRandomInt(max);
+    let questionInt = getRandomInt(max - 1);
     console.log(tweets[questionInt]);
     let question = {
       question: tweets[questionInt].full_text,
