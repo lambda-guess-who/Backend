@@ -17,7 +17,17 @@ async function login(req, res) {
   for (let i = 0; i < user.length; i++) {
     console.log(user[i].auth.password);
     if (user && bcrypt.compareSync(password, user[i].auth.password)) {
-      let token = jwt.sign({ sub: user._id }, secret);
+      let token = jwt.sign(
+        {
+          user: {
+            id: user[i]._id,
+            name: user[i].auth.username,
+            data: user[i].playerData,
+            settings: user[i].settings
+          }
+        },
+        secret
+      );
       return res.status(200).json({ token });
     }
   }
