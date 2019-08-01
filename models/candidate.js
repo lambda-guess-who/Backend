@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Candidate = new Schema({
+const candidateObject = new Schema({
   handle: { type: String, required: true },
   id: { type: Number, required: true }
 });
-exports.Candidate = mongoose.model("Candidate", Candidate);
+exports.candidateObject = mongoose.model("candidateObject", candidateObject);
