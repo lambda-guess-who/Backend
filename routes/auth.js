@@ -26,7 +26,8 @@ async function login(req, res) {
             settings: user[i].settings
           }
         },
-        secret
+        secret,
+        { expiresIn: "1d" }
       );
       return res.status(200).json({ token });
     }
