@@ -42,5 +42,15 @@ router.put("/highscore/:id", authenticate, async (req, res) => {
     return res.status(500).json(e.message);
   }
 });
+router.get("/highscore/:id", authenticate, async (req, res) => {
+  let { id } = req.params;
+  try {
+    let user = await User.findById(id);
+    console.log(user);
+    return res.status(200).json(user.playerData.highscore);
+  } catch (e) {
+    return res.status(500).json(e.message);
+  }
+});
 
 module.exports = router;

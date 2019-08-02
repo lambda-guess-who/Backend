@@ -11,21 +11,31 @@ router.get("/", authenticate, async (req, res) => {
     let rand = [];
     let max = cand.length;
 
+    console.log(`max`, max);
     while (rand.length < 3) {
       let candToAdd = getRandomInt(max - 1);
       if (!rand.includes(candToAdd)) {
         rand.push(candToAdd);
       }
     }
-
+    console.log(`random candis `, rand.length);
     let candidateRand = getRandomInt(3);
+    console.log(`cand rand handle`, cand[rand[candidateRand]].handle);
     let tweets = await Tweet.find({
-      "user.screen_name": cand[rand[candidateRand]].handle
+      "user.screen_name": cand[rand[candidateRand]].handle,
+      full_text: { $exists: true }
     });
 
     max = tweets.length;
     let questionInt = getRandomInt(max - 1);
-    console.log(tweets[questionInt]);
+
+    let questionKey = "";
+    if (tweets[questionInt].full_text) {
+      questionKey = tweets[questionInt].full_text;
+    } else {
+      questionKey = tweets[0].full_text;
+    }
+    console.log(tweets[questionInt].full_text);
     let question = {
       question: tweets[questionInt].full_text,
       answer: tweets[questionInt].user,
